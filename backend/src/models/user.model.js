@@ -10,6 +10,12 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    empresas: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Empresa",
+      },
+    ],
     password: {
       type: String,
       required: true,
