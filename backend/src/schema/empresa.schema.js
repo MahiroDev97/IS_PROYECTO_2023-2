@@ -24,7 +24,7 @@ const empresaBodySchema = Joi.object({
     "string.base": "La direccion de la empresa debe ser de tipo string",
   }),
 
-  user: Joi.string().require().messages({
+  user: Joi.string().required().messages({
     
   }),
 }).messages({
