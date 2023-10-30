@@ -1,7 +1,7 @@
 "use strict";
 
 const postulacion = require("../models/postulacion.model.js");
-const {handleError} = require("../helpers/errorHandler.helper.js");
+const { handleError } = require("../utils/errorHandler");
 const { func } = require("joi");
 const Postulacion = require("../models/postulacion.model.js");
 

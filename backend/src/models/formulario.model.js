@@ -8,14 +8,14 @@ const formularioSchema = mongoose.Schema({
       enum: ["Si", "No", "No sabe"],
       required: true,
     },
-    applicantDetails: {
+    applicantDetails: [{
       type: String,
       required: true,
-    },
-    legalRepresentativeDetails: {
+    }],
+    legalRepresentativeDetails: [{
       type: String,
       required: true,
-    },
+    }],
   });
   
   const Formulario = mongoose.model("Formulario", formularioSchema);

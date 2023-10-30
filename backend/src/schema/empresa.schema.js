@@ -8,21 +8,22 @@ const empresaBodySchema = Joi.object({
     "any.required": "El nombre de la empresa es obligatorio",
     "string.base": "El nombre de la empresa debe ser de tipo string",
   }),
-  giro: Joi.string().require().messages({
+  giro: Joi.string().required().messages({
     "string.empty": "El giro de la empresa no puede estar vacio",
     "any.required": "El giro de la empresa es obligatorio",
     "string.base": "El giro de la empresa debe ser de tipo string",
   }),
-  rut: Joi.string().require().messages({
+  rut: Joi.string().required().messages({
     "string.empty": "El rut de la empresa no puede estar vacio",
     "any.required": "El rut de la empresa es obligatorio",
     "string.base": "El rut de la empresa debe ser de tipo string",
   }),
-  address: Joi.string().require().messages({
+  address: Joi.string().required().messages({
     "string.empty": "La direccion de la empresa no puede estar vacia",
     "any.required": "La direccion de la empresa es obligatoria",
     "string.base": "La direccion de la empresa debe ser de tipo string",
   }),
+
   user: Joi.string().require().messages({
     
   }),
