@@ -1,5 +1,6 @@
 "use strict";
 
+const { string } = require("joi");
 const mongoose = require("mongoose");
 
 const postulacionSchema = mongoose.Schema({
@@ -15,15 +16,14 @@ const postulacionSchema = mongoose.Schema({
                 required: true,
             },
             archivo: {
-                type: Buffer,
+                type: String, // cambiar a tipo de archivo que sea necesario.
                 required: true,
             },
         },
     ],
     formulario: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Formulario",
-        required: true,
+        type: String,
+        required : true,
     },
 });
 

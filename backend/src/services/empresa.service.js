@@ -1,26 +1,22 @@
 "use strict";
 
-const empresa = require("../models/empresa.model.js");
+const Empresa = require("../models/empresa.model.js");
 const { handleError } = require("../utils/errorHandler");
-const user = require("../models/user.model.js");
 const User = require("../models/user.model.js");
 
 async function createEmpresa(empresa){
-    try {
-        const { user, name, description, logo, address, phone, email, web } = empresa;
-        const empresaFound = await Empresa.findOne({email: empresa.email});
+    try{
+        const { name, giro, rut, address, user} = empresa;
+        const empresaFound = await Empresa.findOne({name: empresa.name});
         if(empresaFound) return [null, "La empresa ya existe"];
-        if(!user) return [null, "El usuario no existe"];
-
+        const userFound = await User.findById(user);
+        if(!userFound) return [null, "El usuario no existe"];
         const newEmpresa = new Empresa({
-            user,
             name,
-            description,
-            logo,
+            giro,
+            rut,
             address,
-            phone,
-            email,
-            web
+            user
         });
         await newEmpresa.save();
         return [newEmpresa, null];
@@ -54,15 +50,14 @@ async function updateEmpresa(id, empresa){
         const empresaFound = await Empresa.findById(id);
         if(!empresaFound) return [null, "Empresa no encontrada"];
 
-        const {user, name, description, logo, address, phone, email, web} = empresa;
-        if(user) empresaFound.user = user;
+        
+        const {name,giro,rut,address,user} = empresa;
         if(name) empresaFound.name = name;
-        if(description) empresaFound.description = description;
-        if(logo) empresaFound.logo = logo;
+        if(giro) empresaFound.giro = giro;
+        if(rut) empresaFound.rut = rut;
         if(address) empresaFound.address = address;
-        if(phone) empresaFound.phone = phone;
-        if(email) empresaFound.email = email;
-        if(web) empresaFound.web = web;
+        if(user) empresaFound.user = user;
+        
 
         await empresaFound.save();
         return [empresaFound, null];
@@ -82,3 +77,10 @@ async function deleteEmpresa(id){
     }
 }
 
+module.exports = {
+    createEmpresa,
+    getEmpresaById,
+    getEmpresas,
+    updateEmpresa,
+    deleteEmpresa
+};

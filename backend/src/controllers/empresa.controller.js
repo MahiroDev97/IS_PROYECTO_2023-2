@@ -8,26 +8,6 @@ const { handleError } = require("../utils/errorHandler");
 
 /**
  * 
- * Obtiene todas las empresas
- * @param {Object} req - Objeto de petición
- * @param {Object} res - Objeto de respuesta
- */
-async function getEmpresas(req, res) {
-  try {
-    const [empresas, errorEmpresas] = await EmpresaService.getEmpresas();
-    if (errorEmpresas) return respondError(req, res, 404, errorEmpresas);
-
-    empresas.length === 0
-      ? respondSuccess(req, res, 204)
-      : respondSuccess(req, res, 200, empresas);
-  } catch (error) {
-    handleError(error, "empresa.controller -> getEmpresas");
-    respondError(req, res, 400, error.message);
-  }
-}
-
-/**
- * 
  * Crea una nueva empresa
  * @param {Object} req - Objeto de petición
  * @param {Object} res - Objeto de respuesta
@@ -52,6 +32,28 @@ async function createEmpresa(req, res) {
         respondError(req, res, 500, "No se creo la empresa");
     }
 }
+
+/**
+ * 
+ * Obtiene todas las empresas
+ * @param {Object} req - Objeto de petición
+ * @param {Object} res - Objeto de respuesta
+ */
+async function getEmpresas(req, res) {
+  try {
+    const [empresas, errorEmpresas] = await EmpresaService.getEmpresas();
+    if (errorEmpresas) return respondError(req, res, 404, errorEmpresas);
+
+    empresas.length === 0
+      ? respondSuccess(req, res, 204)
+      : respondSuccess(req, res, 200, empresas);
+  } catch (error) {
+    handleError(error, "empresa.controller -> getEmpresas");
+    respondError(req, res, 400, error.message);
+  }
+}
+
+
 
 /**
  * 
