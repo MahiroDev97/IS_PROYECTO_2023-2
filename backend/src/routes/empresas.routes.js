@@ -10,9 +10,21 @@ const router = express.Router();
 router.use(authenticationMiddleware);
 
 router.get("/", empresaController.getEmpresas);
-router.post("/", authorizationMiddleware.isAdmin, empresaController.createEmpresa);
+router.post(
+  "/",
+  authorizationMiddleware.isUser,
+  empresaController.createEmpresa,
+);
 router.get("/:id", empresaController.getEmpresaById);
-router.put("/:id", authorizationMiddleware.isAdmin, empresaController.updateEmpresa);
-router.delete("/:id", authorizationMiddleware.isAdmin, empresaController.deleteEmpresa);
+router.put(
+  "/:id",
+  authorizationMiddleware.isUser,
+  empresaController.updateEmpresa,
+);
+router.delete(
+  "/:id",
+  authorizationMiddleware.isUser,
+  empresaController.deleteEmpresa,
+);
 
 module.exports = router;
