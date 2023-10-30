@@ -42,8 +42,31 @@ async function updatePostulacion(id, postulacion){
         if(!postulacionFound) return [null, "Postulacion no encontrada"];
 
         const {user, documents, formulario} = postulacion;
-        
+        if(user) postulacionFound.user = user;
+        if(documents) postulacionFound.documents = documents;
+        if(formulario) postulacionFound.formulario = formulario;
     } catch (error) {
         handleError(error, "postulacion.service -> updatePostulacion");
     }
 };
+
+async function deletePostulacion(id){
+    try {
+        const postulacionFound = await Postulacion.findById(id);
+        if(!postulacionFound) return [null, "Postulacion no encontrada"];
+        await Postulacion.findByIdAndDelete(id);
+        return [postulacionFound, null];
+    } catch (error) {
+        handleError(error, "postulacion.service -> deletePostulacion");
+    }
+}
+
+
+module.exports = {
+    createPostulacion,
+    getPostulacionById,
+    getPostulaciones,
+    updatePostulacion,
+    deletePostulacion,
+};
+
