@@ -24,8 +24,8 @@ function LoginForm() {
     <Box component="form" noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)} className="App">
       <div className="container">
         <div className="card_area">
-          <h1 className="container_title">Back to your digital life</h1>
-          <p className="container_para">Choose one of the option to go</p>
+          <h1 className="container_title">Postulaciones Patentes Comerciales</h1>
+          <p className="container_para">Por Favor Inicie Sesión</p>
           <div className="input_card">
             <input
               name="email"
