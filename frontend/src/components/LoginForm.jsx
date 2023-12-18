@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { login } from '../services/auth.service';
-
+import "/styles/LoginForm.css";
 function LoginForm() {
   const navigate = useNavigate();
 
