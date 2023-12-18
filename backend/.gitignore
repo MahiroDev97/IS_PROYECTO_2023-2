@@ -3,6 +3,8 @@
 #Node
 node_modules
 
+public/documents
+
 # Logs
 logs
 *.log

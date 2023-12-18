@@ -10,25 +10,12 @@ const postulacionBodySchema = Joi.object({
   }),
   documents: Joi.array().items(
     Joi.object({
-      nombre: Joi.string().required().messages({
-        "string.empty": "El nombre del documento no puede estar vacio",
-        "any.required": "El nombre del documento es obligatorio",
-        "string.base": "El nombre del documento debe ser de tipo string",
-      }),
-      archivo: Joi.string().required().messages({
-        "string.empty": "El archivo del documento no puede estar vacio",
-        "any.required": "El archivo del documento es obligatorio",
-        "string.base": "El archivo del documento debe ser de tipo string",
-      }),
+      path: Joi.string().required(),
     }),
   ),
-  formulario: Joi.string().required().messages({
-    "string.empty": "El formulario no puede estar vacio",
-    "any.required": "El formulario es obligatorio",
-    "string.base": "El formulario debe ser de tipo string",
-  }),
-}).messages({
-  "object.unknown": "No se permiten propiedades adicionales",
+  estado: Joi.string()
+    .valid("Pendiente", "Aprobado", "Rechazado")
+    .default("Pendiente"),
 });
 
 const postulacionIdSchema = Joi.object({
