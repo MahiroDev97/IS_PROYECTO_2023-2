@@ -4,6 +4,7 @@ import { HomeOutlined, FilePdfOutlined, UserOutlined, LogoutOutlined, MenuFoldOu
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
+
 const { Sider } = Layout;
 
 function MenuList() {
@@ -19,9 +20,10 @@ function MenuList() {
     };
 
     return (
-        <Sider style = {{ height: '100vh'}}collapsible collapsed={collapsed} onCollapse={setCollapsed} collapsedWidth={80} >            <Menu theme="dark">
-                <Menu.Item key="inicio" icon={<HomeOutlined />}>Inicio</Menu.Item>
-                <Menu.Item key="postular" icon={<FilePdfOutlined />}>Postular</Menu.Item>
+        <Sider style={{ height: '100vh' }} collapsible collapsed={collapsed} onCollapse={setCollapsed} collapsedWidth={80}>
+            <Menu theme="dark">
+                <Menu.Item key="inicio" icon={<HomeOutlined />}onClick={() => Navigate('/')}>Inicio</Menu.Item>
+                <Menu.Item key="postular" icon={<FilePdfOutlined />} onClick={() => Navigate('/postular')}>Postular</Menu.Item>
                 <Menu.Item key="mispostulaciones" icon={<UserOutlined />}>Mis Postulaciones</Menu.Item>
                 <Menu.Item key="salir" icon={<LogoutOutlined />} onClick={handleLogout}>Cerrar Sesion</Menu.Item>
                 <Menu.Item key="user" icon={<UserOutlined />} style={{ background: 'none', color: 'inherit', cursor: 'pointer' }}>{user.email}</Menu.Item>
