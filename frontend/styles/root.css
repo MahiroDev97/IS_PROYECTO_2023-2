@@ -6,6 +6,7 @@
   left: 0;
   top: 0;
   overflow: auto;
+  color: grey;
 
   .menu {
     list-style: none;

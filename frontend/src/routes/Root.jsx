@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { logout } from '../services/auth.service';
 import { AuthProvider, useAuth } from '../context/AuthContext';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import "/styles/root.css";
+//import "/styles/root.css";
 
 function Root() {
   return (
@@ -29,7 +29,8 @@ function PageRoot() {
     <div>
       <div>
       <Sidebar className='sidebar'>
-        <Menu className='menu'>
+        <Menu theme ="dark" className='menu'>
+
           <MenuItem className='menu-item'> Información </MenuItem>
           <MenuItem> Postular </MenuItem>
           <MenuItem> Mis Postulaciones </MenuItem>
