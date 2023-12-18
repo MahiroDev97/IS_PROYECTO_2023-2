@@ -1,69 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900');
  
 .container {
-  background-color: white;
-  max-width: 530px;
-  height: 600px;
-  margin: auto;
-  margin-top: 80px;
-  border-radius: 4px;
-   
-  .input_card
-  {
-    margin-top: 10px;
-  }
- 
-  .input
-  {
-    width: 100%;
-    margin-top: 15px;
-  }
- 
-  .card_area
-  {
-    padding:80px;
-  }
- 
-  .container_title
-  {
-    font-size: 30px;
-    font-weight: 700;
-    display: flex;
-    align-items: flex-start;
-    margin-bottom:-8px;
-    color: #292929;
-  }
-  .container_para
-  {
-    color: #545454;
-    font-size: 18px;
-    font-weight: 400;
-  }
+    background-color: white;
+    max-width: 530px;
+    height: 600px;
+    margin: auto;
+    margin-top: 80px;
+    border-radius: 4px;
+    
+    .input_card
+    {
+      margin-top: 10px;
+    }
+  
+    .input
+    {
+      width: 100%;
+      margin-top: 15px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+  
+    .card_area
+    {
+      padding:80px;
+    }
+  
+    .container_title
+    {
+      font-size: 30px;
+      font-weight: 700;
+      display: flex;
+      align-items: flex-start;
+      margin-bottom:-8px;
+      color: #292929;
+    }
+    .container_para
+    {
+      color: #545454;
+    }
  
   .line
   {
     display: flex;
-  }
-  .social_card{
-    display: flex;
-     
-  .google
-  {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 131px;
-    height: 61px;
-    background-color: #F7F7F7;
-    border-radius: 4px;
-    margin-left: 10px;
-  }
- 
-   
- 
-   
- 
-   
   }
  
   .card_button
