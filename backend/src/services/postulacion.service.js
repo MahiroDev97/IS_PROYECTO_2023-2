@@ -4,6 +4,7 @@ const postulacion = require("../models/postulacion.model.js");
 const { handleError } = require("../utils/errorHandler");
 const { func } = require("joi");
 const Postulacion = require("../models/postulacion.model.js");
+const { storage } = require("../middlewares/upload.middleware.js");
 
 async function createPostulacion(postulacion) {
   try {

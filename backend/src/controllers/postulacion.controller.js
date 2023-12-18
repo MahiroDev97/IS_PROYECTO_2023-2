@@ -1,5 +1,6 @@
 "use strict";
-
+const multer = require("multer");
+const upload = multer({ dest: "public/documents" });
 const { respondSuccess, respondError } = require("../utils/resHandler");
 const PostulacionService = require("../services/postulacion.service");
 const {
@@ -41,7 +42,9 @@ async function getPostulaciones(req, res) {
 
 async function createPostulacion(req, res) {
   try {
-    const { body } = req;
+    let { body } = req;
+    body.documents = req.files.map((file) => ({ path: file.path }));
+
     const { error: bodyError } = postulacionBodySchema.validate(body);
     if (bodyError) return respondError(req, res, 400, bodyError.message);
 
