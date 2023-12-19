@@ -5,7 +5,7 @@ import "/styles/Root.css";
 
 const {Content,Sider } = Layout;
 
-function Root() {
+function Postulaciones() {
   return (
     <AuthProvider>
       <PagePostulaciones />

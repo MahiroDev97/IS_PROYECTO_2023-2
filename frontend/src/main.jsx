@@ -5,7 +5,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './routes/Root.jsx';
 import ErrorPage from './routes/ErrorPage.jsx';
 import Login from './routes/Login.jsx';
-import Postular from './routes/postular.jsx'; // Fix import casing
+import Postular from './routes/postular.jsx';
+import Postulaciones from './routes/Postulaciones.jsx'; 
 
 const router = createBrowserRouter([
   {
