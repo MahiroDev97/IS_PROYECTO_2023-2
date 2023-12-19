@@ -26,7 +26,11 @@ const router = createBrowserRouter([
   {
     path: '/postular',
     element: <Postular />,
-  }
+  },
+  {
+    path: '/postulaciones',
+    element: <Postulaciones />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

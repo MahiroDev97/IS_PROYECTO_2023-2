@@ -24,7 +24,7 @@ function MenuList() {
             <Menu theme="dark">
                 <Menu.Item key="inicio" icon={<HomeOutlined />}onClick={() => Navigate('/')}>Inicio</Menu.Item>
                 <Menu.Item key="postular" icon={<FilePdfOutlined />} onClick={() => Navigate('/postular')}>Postular</Menu.Item>
-                <Menu.Item key="mispostulaciones" icon={<UserOutlined />}>Mis Postulaciones</Menu.Item>
+                <Menu.Item key="mispostulaciones" icon={<UserOutlined />} onClick={() => Navigate('/postulaciones')}>Mis Postulaciones</Menu.Item>
                 <Menu.Item key="salir" icon={<LogoutOutlined />} onClick={handleLogout}>Cerrar Sesion</Menu.Item>
                 <Menu.Item key="user" icon={<UserOutlined />} style={{ background: 'none', color: 'inherit', cursor: 'pointer' }}>{user.email}</Menu.Item>
             </Menu>
