@@ -3,7 +3,7 @@ import { Layout, Menu } from 'antd';
 import { HomeOutlined, FilePdfOutlined, UserOutlined, LogoutOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-
+import { logout } from '../services/auth.service';
 
 const { Sider } = Layout;
 
