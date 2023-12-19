@@ -2,7 +2,9 @@ import { AuthProvider, useAuth } from '../context/AuthContext';
 import { Layout} from 'antd';
 import MenuList from '../components/MenuList';
 import "/styles/Root.css";
+
 const {Content,Sider } = Layout;
+
 function Root() {
   return (
     <AuthProvider>
