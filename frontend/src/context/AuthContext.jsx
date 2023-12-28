@@ -11,7 +11,10 @@ export function AuthProvider({ children }) {
   const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem('user')) || '';
+  const roles = user.roles || [];
+
   const isAuthenticated = user ? true : false;
+  const isAdmin = roles.some(role => role.name === 'admin');
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -20,7 +23,7 @@ export function AuthProvider({ children }) {
   }, [isAuthenticated, navigate]);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, isAdmin,}}>
       {children}
     </AuthContext.Provider>
   );

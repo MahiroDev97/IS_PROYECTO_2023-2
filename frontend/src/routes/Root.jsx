@@ -27,6 +27,7 @@ function PageRoot() {
         <h1>Aqui deberia ir un header</h1>
         <p>Estas logeado como: {user.email}</p>
         <button onClick={handleLogout}>Cerrar sesion</button>
+        <button onClick={() => navigate('/admin')}>Admin</button>
       </div>
       <Outlet />
     </div>
