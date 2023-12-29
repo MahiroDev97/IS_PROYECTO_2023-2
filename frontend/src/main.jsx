@@ -7,6 +7,7 @@ import ErrorPage from './routes/ErrorPage.jsx';
 import Login from './routes/Login.jsx';
 import AdminRoute from './components/AdminRoute.jsx';
 import { AdminPage } from './routes/AdminPage.jsx';
+import { Postulaciones } from './routes/Postulaciones.jsx';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AdminPage />
+          </AdminRoute>
+        )
+      },
+      {
+        path: '/admin/postulaciones',
+        element: (
+          <AdminRoute>
+            <Postulaciones />
           </AdminRoute>
         )
       }

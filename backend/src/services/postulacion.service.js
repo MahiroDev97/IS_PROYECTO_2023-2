@@ -33,8 +33,9 @@ async function getPostulacionById(id) {
 
 async function getPostulaciones() {
   try {
-    const postulaciones = await postulacion.find();
-    if (!postulaciones) return [null, "No hay postulaciones"];
+    const postulaciones = await Postulacion.find().populate("user").exec();
+    if (!postulaciones || postulaciones.length === 0)
+      return [null, "No hay postulaciones"];
     return [postulaciones, null];
   } catch (error) {
     handleError(error, "postulacion.service -> getPostulaciones");

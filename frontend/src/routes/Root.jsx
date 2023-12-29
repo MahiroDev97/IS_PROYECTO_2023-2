@@ -19,7 +19,7 @@ function PageRoot() {
     navigate('/auth');
   };
 
-  const { user } = useAuth();
+  const { user, isAdmin } = useAuth();
 
   return (
     <div>
@@ -27,7 +27,9 @@ function PageRoot() {
         <h1>Aqui deberia ir un header</h1>
         <p>Estas logeado como: {user.email}</p>
         <button onClick={handleLogout}>Cerrar sesion</button>
+        {isAdmin && <button onClick={() => navigate('/admin/postulaciones')}>Admin Postulaciones</button>}
         <button onClick={() => navigate('/admin')}>Admin</button>
+        
       </div>
       <Outlet />
     </div>
