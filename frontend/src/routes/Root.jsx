@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { logout } from '../services/auth.service';
 import { AuthProvider, useAuth } from '../context/AuthContext';
 
+
 function Root() {
   return (
     <AuthProvider>
@@ -19,7 +20,7 @@ function PageRoot() {
     navigate('/auth');
   };
 
-  const { user, isAdmin } = useAuth();
+  const { user, isAdmin} = useAuth();
 
   return (
     <div>
@@ -28,8 +29,6 @@ function PageRoot() {
         <p>Estas logeado como: {user.email}</p>
         <button onClick={handleLogout}>Cerrar sesion</button>
         {isAdmin && <button onClick={() => navigate('/admin/postulaciones')}>Admin Postulaciones</button>}
-        <button onClick={() => navigate('/admin')}>Admin</button>
-        
       </div>
       <Outlet />
     </div>

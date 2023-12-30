@@ -1,33 +1,35 @@
-"user strict";
+"use strict";
 
 const Joi = require("joi");
 
 const postulacionBodySchema = Joi.object({
-  user: Joi.string().required().messages({
-    "string.empty": "El usuario no puede estar vacio",
-    "any.required": "El usuario es obligatorio",
-    "string.base": "El usuario debe ser de tipo string",
+  empresa: Joi.string().required().messages({
+    "string.empty": "La empresa no puede estar vacía.",
+    "any.required": "La empresa es obligatoria.",
+    "string.base": "La empresa debe ser de tipo string.",
   }),
-  documents: Joi.array().items(
+  tipo: Joi.string().required().messages({
+    "string.empty": "El tipo no puede estar vacío.",
+    "any.required": "El tipo es obligatorio.",
+    "string.base": "El tipo debe ser de tipo string.",
+    "string.only": "El tipo debe ser Comercial o De Alcoholes.",
+  }),
+  documentos: Joi.array().items(
     Joi.object({
-      path: Joi.string().required(),
+      nombre: Joi.string().required().messages({
+        "string.empty": "El nombre no puede estar vacío.",
+        "any.required": "El nombre es obligatorio.",
+        "string.base": "El nombre debe ser de tipo string.",
+      }),
+      url: Joi.string().required().messages({
+        "string.empty": "La url no puede estar vacía.",
+        "any.required": "La url es obligatoria.",
+        "string.base": "La url debe ser de tipo string.",
+      }),
     }),
   ),
-  estado: Joi.string()
-    .valid("Pendiente", "Aprobado", "Rechazado")
-    .default("Pendiente"),
+}).messages({
+  "object.unknown": "No se permiten propiedades adicionales.",
 });
 
-const postulacionIdSchema = Joi.object({
-  id: Joi.string()
-    .required()
-    .pattern(/^(?:[0-9a-fA-F]{24}|[0-9a-fA-F]{12})$/)
-    .messages({
-      "string.empty": "El id no puede estar vacio",
-      "any.required": "El id es obligatorio",
-      "string.base": "El id debe ser de tipo string",
-      "string.pattern.base": "El id proporcionado no es un ObjectId valido",
-    }),
-});
-
-module.exports = { postulacionBodySchema, postulacionIdSchema };
+module.exports = { postulacionBodySchema };

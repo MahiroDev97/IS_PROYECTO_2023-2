@@ -1,14 +1,9 @@
 const multer = require("multer");
 
 const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => {
-    cb(null, "./public/documents");
-  },
-  filename: (_req, file, cb) => {
-    if (file != null) {
-      const ext = file.originalname.split(".").pop();
-      cb(null, `${Date.now()}.${ext}`);
-    }
+  destination: "./public/documentos",
+  filename: function (_req, file, cb) {
+    cb(null, `${Date.now()}-${file.originalname}`);
   },
 });
 
@@ -26,6 +21,6 @@ const fileFilter = (_, file, cb) => {
   }
 };
 
-const upload = multer({ storage, fileFilter }).array("documents", 10);
+const upload = multer({ storage, fileFilter }).array("documentos", 10);
 
-module.exports = { upload, storage };
+module.exports = upload;

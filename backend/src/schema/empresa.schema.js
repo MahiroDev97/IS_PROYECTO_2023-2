@@ -1,46 +1,35 @@
-"use strct";
+"use strict";
 
 const Joi = require("joi");
 
 const empresaBodySchema = Joi.object({
-  name: Joi.string().required().messages({
-    "string.empty": "El nombre de la empresa no puede estar vacio",
-    "any.required": "El nombre de la empresa es obligatorio",
-    "string.base": "El nombre de la empresa debe ser de tipo string",
+  nombre: Joi.string().required().messages({
+    "string.empty": "El nombre no puede estar vacío.",
+    "any.required": "El nombre es obligatorio.",
+    "string.base": "El nombre debe ser de tipo string.",
   }),
   giro: Joi.string().required().messages({
-    "string.empty": "El giro de la empresa no puede estar vacio",
-    "any.required": "El giro de la empresa es obligatorio",
-    "string.base": "El giro de la empresa debe ser de tipo string",
+    "string.empty": "El giro no puede estar vacío.",
+    "any.required": "El giro es obligatorio.",
+    "string.base": "El giro debe ser de tipo string.",
   }),
   rut: Joi.string().required().messages({
-    "string.empty": "El rut de la empresa no puede estar vacio",
-    "any.required": "El rut de la empresa es obligatorio",
-    "string.base": "El rut de la empresa debe ser de tipo string",
+    "string.empty": "El rut no puede estar vacío.",
+    "any.required": "El rut es obligatorio.",
+    "string.base": "El rut debe ser de tipo string.",
   }),
-  address: Joi.string().required().messages({
-    "string.empty": "La direccion de la empresa no puede estar vacia",
-    "any.required": "La direccion de la empresa es obligatoria",
-    "string.base": "La direccion de la empresa debe ser de tipo string",
+  direccion: Joi.string().required().messages({
+    "string.empty": "La dirección no puede estar vacía.",
+    "any.required": "La dirección es obligatoria.",
+    "string.base": "La dirección debe ser de tipo string.",
   }),
-
   user: Joi.string().required().messages({
-    
+    "string.empty": "El usuario no puede estar vacío.",
+    "any.required": "El usuario es obligatorio.",
+    "string.base": "El usuario debe ser de tipo string.",
   }),
 }).messages({
-  "object.unknown": "No se permiten propiedades adicionales",
+  "object.unknown": "No se permiten propiedades adicionales.",
 });
 
-const empresaIdSchema = Joi.object({
-  id: Joi.string()
-    .required()
-    .pattern(/^(?:[0-9a-fA-F]{24}|[0-9a-fA-F]{12})$/)
-    .messages({
-      "string.empty": "El id no puede estar vacío.",
-      "any.required": "El id es obligatorio.",
-      "string.base": "El id debe ser de tipo string.",
-      "string.pattern.base": "El id proporcionado no es un ObjectId válido.",
-    }),
-});
-
-module.exports = { empresaBodySchema, empresaIdSchema };
+module.exports = { empresaBodySchema };

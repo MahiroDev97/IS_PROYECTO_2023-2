@@ -2,30 +2,32 @@
 
 const mongoose = require("mongoose");
 
-const empresaSchema = mongoose.Schema({
-    name: {
-        type: String,
-        required: true
+const empresaSchema = new mongoose.Schema(
+  {
+    nombre: {
+      type: String,
+      required: true,
     },
     giro: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     rut: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
-    address: {
-        type: String,
-        required: true
+    direccion: {
+      type: String,
+      required: true,
     },
     user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
-});
+  },
+  {
+    versionKey: false,
+  },
+);
 
-const Empresa = mongoose.model("Empresa", empresaSchema);
-
-module.exports = Empresa;
+module.exports = mongoose.model("Empresa", empresaSchema);

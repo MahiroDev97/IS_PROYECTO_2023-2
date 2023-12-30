@@ -1,44 +1,56 @@
 "use strict";
 
-const postulacion = require("../models/postulacion.model.js");
-const { handleError } = require("../utils/errorHandler");
-const { func } = require("joi");
-const Postulacion = require("../models/postulacion.model.js");
-const { storage } = require("../middlewares/upload.middleware.js");
+const handleError = require("../utils/errorHandler");
+const Postulacion = require("../models/postulacion.model");
+const Empresa = require("../models/empresa.model");
 
 async function createPostulacion(postulacion) {
   try {
-    const { user, documents, formulario } = postulacion;
+    const { empresa, tipo, documentos } = postulacion;
+    console.log(documentos);
+    const empresaFound = await Empresa.findById(empresa);
+    if (!empresaFound) return [null, "Empresa no existe"];
     const newPostulacion = new Postulacion({
-      user,
-      documents,
-      formulario,
+      empresa,
+      tipo,
+      documentos,
     });
     await newPostulacion.save();
     return [newPostulacion, null];
   } catch (error) {
-    handleError(error, "postulacion.service -> createPostulacion");
-  }
-}
-
-async function getPostulacionById(id) {
-  try {
-    const postulacionFound = await postulacion.findById(id);
-    if (!postulacionFound) return [null, "Postulacion no encontrada"];
-    return [postulacionFound, null];
-  } catch (error) {
-    handleError(error, "postulacion.service -> getPostulacionById");
+    handleError(error, "postulacion.service.js -> createPostulacion");
   }
 }
 
 async function getPostulaciones() {
   try {
-    const postulaciones = await Postulacion.find().populate("user").exec();
+    const postulaciones = await Postulacion.find()
+      .populate({
+        path: "empresa",
+        populate: {
+          path: "user",
+        },
+      })
+      .exec();
     if (!postulaciones || postulaciones.length === 0)
-      return [null, "No hay postulaciones"];
+      return [null, "No hay postulaciones disponibles."];
     return [postulaciones, null];
   } catch (error) {
-    handleError(error, "postulacion.service -> getPostulaciones");
+    handleError(error, "postulacion.service.js -> getPostulaciones");
+  }
+}
+
+async function getPostulacionById(id) {
+  try {
+    const postulacion = await Postulacion.findById(id).populate({
+      path: "empresa",
+      populate: {
+        path: "user",
+      },
+    });
+    return [postulacion, null];
+  } catch (error) {
+    handleError(error, "postulacion.service.js -> getPostulacionById");
   }
 }
 
@@ -55,7 +67,7 @@ async function updatePostulacion(id, postulacion) {
     );
     return [postulacionUpdated, null];
   } catch (error) {
-    handleError(error, "postulacion.service -> updatePostulacion");
+    handleError(error, "postulacion.service.js -> updatePostulacion");
   }
 }
 
@@ -66,14 +78,14 @@ async function deletePostulacion(id) {
     await Postulacion.findByIdAndDelete(id);
     return [postulacionFound, null];
   } catch (error) {
-    handleError(error, "postulacion.service -> deletePostulacion");
+    handleError(error, "postulacion.service.js -> deletePostulacion");
   }
 }
 
 module.exports = {
   createPostulacion,
-  getPostulacionById,
   getPostulaciones,
+  getPostulacionById,
   updatePostulacion,
   deletePostulacion,
 };

@@ -15,8 +15,7 @@ const { setupDB } = require("./config/configDB.js");
 // Importa el handler de errores
 const { handleFatalError, handleError } = require("./utils/errorHandler.js");
 const { createRoles, createUsers } = require("./config/initialSetup");
-
-const path = require("path");
+const path = require("path"); // Import the 'path' module
 
 /**
  * Inicia el servidor web
@@ -26,24 +25,20 @@ async function setupServer() {
     /** Instancia de la aplicacion */
     const server = express();
     server.use(
-      "/public/documents",
-      express.static(path.join(__dirname, "../public/documents")),
+      "/public/documentos",
+      express.static(path.join(__dirname, "../public/documentos")),
     );
+    server.disable("x-powered-by");
+    // Agregamos los cors
+    server.use(cors({ credentials: true, origin: true }));
+    // Agrega el middleware para el manejo de datos en formato URL
+    server.use(express.urlencoded({ extended: true }));
     // Agrega el middleware para el manejo de datos en formato JSON
     server.use(express.json());
-    // Agregamos los cors
-    server.use(
-      cors({
-        origin: "http://localhost:5173", // reemplaza esto con la URL de tu servidor frontend
-        credentials: true,
-      }),
-    );
     // Agregamos el middleware para el manejo de cookies
     server.use(cookieParser());
     // Agregamos morgan para ver las peticiones que se hacen al servidor
     server.use(morgan("dev"));
-    // Agrega el middleware para el manejo de datos en formato URL
-    server.use(express.urlencoded({ extended: true }));
     // Agrega el enrutador principal al servidor
     server.use("/api", indexRoutes);
 

@@ -13,9 +13,7 @@ function LoginForm() {
 
   const onSubmit = (data) => {
     login(data).then((roles) => {
-      console.log(roles)
       const isAdmin = roles.some(role => role.name === 'admin');
-      console.log(isAdmin)
       if (isAdmin) {
         navigate('/admin');
         return;

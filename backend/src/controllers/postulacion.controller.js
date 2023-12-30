@@ -1,149 +1,90 @@
 "use strict";
-const multer = require("multer");
-const upload = multer({ dest: "public/documents" });
-const { respondSuccess, respondError } = require("../utils/resHandler");
-const PostulacionService = require("../services/postulacion.service");
-const {
-  postulacionBodySchema,
-  postulacionIdSchema,
-} = require("../schema/postulacion.schema");
-const { handleError } = require("../utils/errorHandler");
 
-/**
- *
- *
- * Obtiene todas las postulaciones
- * @param {Object} req - Objeto de petición
- * @param {Object} res - Objeto de respuesta
- */
+const { respondSuccess, respondError } = require("../utils/resHandler.js");
+const { handleError } = require("../utils/errorHandler.js");
+const PostulacionService = require("../services/postulacion.service.js");
+const { postulacionBodySchema } = require("../schema/postulacion.schema.js");
+
+async function createPostulacion(req, res) {
+  try {
+    let { body } = req;
+    body.documentos = req.files.map((file) => ({
+      nombre: file.originalname,
+      url: file.path,
+    }));
+    const { error } = postulacionBodySchema.validate(body);
+    if (error) return respondError(req, res, 400, error.message);
+    const [postulacion, errorPostulacion] =
+      await PostulacionService.createPostulacion(body);
+    if (errorPostulacion) return respondError(req, res, 404, errorPostulacion);
+    if (!postulacion)
+      return respondError(req, res, 400, "No se pudo crear la postulación");
+    respondSuccess(req, res, 201, postulacion);
+  } catch (error) {
+    handleError(error, "postulacion.controller.js -> createPostulacion");
+    res.status(500).json({ error: error.message });
+  }
+}
 
 async function getPostulaciones(req, res) {
   try {
     const [postulaciones, errorPostulaciones] =
       await PostulacionService.getPostulaciones();
     if (errorPostulaciones)
-      return respondError(req, res, 404, errorPostulaciones);
+      return res.status(404).json({ error: errorPostulaciones });
 
     postulaciones.length === 0
-      ? respondSuccess(req, res, 204)
-      : respondSuccess(req, res, 200, postulaciones);
+      ? res.status(204).send()
+      : res.status(200).json(postulaciones);
   } catch (error) {
-    handleError(error, "postulacion.controller -> getPostulaciones");
-    respondError(req, res, 400, error.message);
+    handleError(error, "postulacion.controller.js -> getPostulaciones");
+    res.status(500).json({ error: error.message });
   }
 }
-
-/**
- *
- * Crea una nueva postulacion
- * @param {Object} req - Objeto de petición
- * @param {Object} res - Objeto de respuesta
- */
-
-async function createPostulacion(req, res) {
-  try {
-    let { body } = req;
-    body.documents = req.files.map((file) => ({ path: file.path }));
-
-    const { error: bodyError } = postulacionBodySchema.validate(body);
-    if (bodyError) return respondError(req, res, 400, bodyError.message);
-
-    const [newPostulacion, postulacionError] =
-      await PostulacionService.createPostulacion(body);
-
-    if (postulacionError) return respondError(req, res, 400, postulacionError);
-    if (!newPostulacion) {
-      return respondError(req, res, 400, "No se creo la postulacion");
-    }
-
-    respondSuccess(req, res, 201, newPostulacion);
-  } catch (error) {
-    handleError(error, "postulacion.controller -> createPostulacion");
-    respondError(req, res, 500, "No se creo la postulacion");
-  }
-}
-
-/**
- *
- * Obtiene una postulacion por su id
- * @param {Object} req - Objeto de petición
- * @param {Object} res - Objeto de respuesta
- */
 
 async function getPostulacionById(req, res) {
   try {
-    const { params } = req;
-    const { error: paramsError } = postulacionIdSchema.validate(params);
-    if (paramsError) return respondError(req, res, 400, paramsError.message);
-
+    const { id } = req.params;
     const [postulacion, errorPostulacion] =
-      await PostulacionService.getPostulacionById(params.id);
-
+      await PostulacionService.getPostulacionById(id);
     if (errorPostulacion) return respondError(req, res, 404, errorPostulacion);
-
     respondSuccess(req, res, 200, postulacion);
   } catch (error) {
-    handleError(error, "postulacion.controller -> getPostulacionById");
-    respondError(req, res, 400, error.message);
+    handleError(error, "postulacion.controller.js -> getPostulacionById");
+    respondError(req, res, 500, error.message);
   }
 }
-
-/**
- *
- * Actualiza una postulacion por su id
- * @param {Object} req - Objeto de petición
- * @param {Object} res - Objeto de respuesta
- */
 
 async function updatePostulacion(req, res) {
   try {
-    const { params, body } = req;
-    const { error: paramsError } = postulacionIdSchema.validate(params);
-    if (paramsError) return respondError(req, res, 400, paramsError.message);
-
-    const { error: bodyError } = postulacionBodySchema.validate(body);
-    if (bodyError) return respondError(req, res, 400, bodyError.message);
-
+    const { id } = req.params;
+    const { body } = req;
     const [postulacion, errorPostulacion] =
-      await PostulacionService.updatePostulacion(params.id, body);
-
+      await PostulacionService.updatePostulacion(id, body);
     if (errorPostulacion) return respondError(req, res, 404, errorPostulacion);
-
     respondSuccess(req, res, 200, postulacion);
   } catch (error) {
-    handleError(error, "postulacion.controller -> updatePostulacion");
-    respondError(req, res, 400, error.message);
+    handleError(error, "postulacion.controller.js -> updatePostulacion");
+    respondError(req, res, 500, error.message);
   }
 }
 
-/**
- *
- * Elimina una postulacion por su id
- * @param {Object} req - Objeto de petición
- * @param {Object} res - Objeto de respuesta
- */
-
 async function deletePostulacion(req, res) {
   try {
-    const { params } = req;
-    const { error: paramsError } = postulacionIdSchema.validate(params);
-    if (paramsError) return respondError(req, res, 400, paramsError.message);
-
+    const { id } = req.params;
     const [postulacion, errorPostulacion] =
-      await PostulacionService.deletePostulacion(params.id);
-
+      await PostulacionService.deletePostulacion(id);
     if (errorPostulacion) return respondError(req, res, 404, errorPostulacion);
-
     respondSuccess(req, res, 200, postulacion);
   } catch (error) {
-    handleError(error, "postulacion.controller -> deletePostulacion");
-    respondError(req, res, 400, error.message);
+    handleError(error, "postulacion.controller.js -> deletePostulacion");
+    respondError(req, res, 500, error.message);
   }
 }
 
 module.exports = {
-  getPostulaciones,
   createPostulacion,
+  getPostulaciones,
   getPostulacionById,
   updatePostulacion,
   deletePostulacion,

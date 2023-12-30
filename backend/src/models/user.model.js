@@ -10,12 +10,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    empresas: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Empresa",
-      },
-    ],
     password: {
       type: String,
       required: true,
@@ -24,6 +18,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+    },
+    contac: {
+      type: String,
+      required: true,
     },
     roles: [
       {

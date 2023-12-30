@@ -6,8 +6,8 @@ import Root from './routes/Root.jsx';
 import ErrorPage from './routes/ErrorPage.jsx';
 import Login from './routes/Login.jsx';
 import AdminRoute from './components/AdminRoute.jsx';
-import { AdminPage } from './routes/AdminPage.jsx';
-import { Postulaciones } from './routes/Postulaciones.jsx';
+import {AdminPage} from './routes/AdminPage.jsx';
+import {Postulaciones} from './routes/Postulaciones.jsx';
 
 const router = createBrowserRouter([
   {

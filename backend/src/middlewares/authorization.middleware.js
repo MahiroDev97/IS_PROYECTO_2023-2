@@ -32,6 +32,12 @@ async function isAdmin(req, res, next) {
   }
 }
 
+/**
+ * Comprueba si el usuario es usuario
+ * @param {Object} req - Objeto de petición
+ * @param {Object} res - Objeto de respuesta
+ * @param {Function} next - Función para continuar con la siguiente función
+ */
 async function isUser(req, res, next) {
   try {
     const user = await User.findOne({ email: req.email });
@@ -53,19 +59,18 @@ async function isUser(req, res, next) {
   }
 }
 
-async function tieneEmpresa(req, res, next) {
+/**
+ * Comprueba si el usuario es administrador o usuario
+ * @param {Object} req - Objeto de petición
+ * @param {Object} res - Objeto de respuesta
+ * @param {Function} next - Función para continuar con la siguiente función
+ */
+async function isAdminOrUser(req, res, next) {
   try {
     const user = await User.findOne({ email: req.email });
     const roles = await Role.find({ _id: { $in: user.roles } });
     for (let i = 0; i < roles.length; i++) {
-      if (roles[i].name === "user") {
-        if (user.empresa === null)
-          return respondError(
-            req,
-            res,
-            401,
-            "Se requiere una empresa para realizar esta acción",
-          );
+      if (roles[i].name === "admin" || roles[i].name === "user") {
         next();
         return;
       }
@@ -74,15 +79,15 @@ async function tieneEmpresa(req, res, next) {
       req,
       res,
       401,
-      "Se requiere un rol de usuario para realizar esta acción",
+      "Se requiere un rol de administrador o usuario para realizar esta acción",
     );
   } catch (error) {
-    handleError(error, "authorization.middleware -> isUser");
+    handleError(error, "authorization.middleware -> isAdminOrUser");
   }
 }
 
 module.exports = {
   isAdmin,
   isUser,
-  tieneEmpresa,
+  isAdminOrUser,
 };

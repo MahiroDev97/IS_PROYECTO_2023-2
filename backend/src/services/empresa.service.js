@@ -1,86 +1,85 @@
 "use strict";
 
 const Empresa = require("../models/empresa.model.js");
-const { handleError } = require("../utils/errorHandler");
+const { handleError } = require("../utils/errorHandler.js");
 const User = require("../models/user.model.js");
 
-async function createEmpresa(empresa){
-    try{
-        const { name, giro, rut, address, user} = empresa;
-        const empresaFound = await Empresa.findOne({name: empresa.name});
-        if(empresaFound) return [null, "La empresa ya existe"];
-        const userFound = await User.findById(user);
-        if(!userFound) return [null, "El usuario no existe"];
-        const newEmpresa = new Empresa({
-            name,
-            giro,
-            rut,
-            address,
-            user
-        });
-        await newEmpresa.save();
-        return [newEmpresa, null];
-    } catch (error) {
-        handleError(error, "empresa.service -> createEmpresa");
-    }
+async function createEmpresa(empresa) {
+  try {
+    const { nombre, giro, rut, direccion, user } = empresa;
+    const empresaFound = await Empresa.findOne({ rut: empresa.rut });
+    if (empresaFound) return [null, "Empresa ya existe"];
+    const userFound = await User.findById(user);
+    if (!userFound) return [null, "Usuario no existe"];
+    const newEmpresa = new Empresa({
+      nombre,
+      giro,
+      rut,
+      direccion,
+      user,
+    });
+    const myEmpresa = await newEmpresa.save();
+    return [myEmpresa, null];
+  } catch (error) {
+    handleError(error, "empresa.service.js -> createEmpresa");
+  }
 }
 
-async function getEmpresaById(id){
-    try {
-        const empresaFound = await Empresa.findById(id);
-        if(!empresaFound) return [null, "Empresa no encontrada"];
-        return [empresaFound, null];
-    } catch (error) {
-        handleError(error, "empresa.service -> getEmpresaById");
-    }
+async function getEmpresas() {
+  try {
+    const empresas = await Empresa.find().populate("user");
+    return [empresas, null];
+  } catch (error) {
+    handleError(error, "product.service.js -> getEmpresas");
+  }
 }
 
-async function getEmpresas(){
-    try {
-        const empresas = await Empresa.find();
-        if(!empresas) return [null, "No hay empresas"];
-        return [empresas, null];
-    } catch (error) {
-        handleError(error, "empresa.service -> getEmpresas");
-    }
+async function getEmpresaById(id) {
+  try {
+    const empresa = await Empresa.findById(id).populate("user");
+    return [empresa, null];
+  } catch (error) {
+    handleError(error, "product.service.js -> getEmpresaById");
+  }
 }
 
-async function updateEmpresa(id, empresa){
-    try {
-        const empresaFound = await Empresa.findById(id);
-        if(!empresaFound) return [null, "Empresa no encontrada"];
-
-        
-        const {name,giro,rut,address,user} = empresa;
-        if(name) empresaFound.name = name;
-        if(giro) empresaFound.giro = giro;
-        if(rut) empresaFound.rut = rut;
-        if(address) empresaFound.address = address;
-        if(user) empresaFound.user = user;
-        
-
-        await empresaFound.save();
-        return [empresaFound, null];
-    } catch (error) {
-        handleError(error, "empresa.service -> updateEmpresa");
-    }
+async function updateEmpresa(id, empresa) {
+  try {
+    const { nombre, giro, rut, direccion, user } = empresa;
+    const empresaFound = await Empresa.findOne({ rut: empresa.rut });
+    if (empresaFound) return [null, "Empresa ya existe"];
+    const userFound = await User.findOne({ username: user });
+    if (!userFound) return [null, "Usuario no existe"];
+    const empresaUpdated = await Empresa.findByIdAndUpdate(
+      id,
+      {
+        nombre,
+        giro,
+        rut,
+        direccion,
+        user: userFound._id,
+      },
+      { new: true },
+    );
+    return [empresaUpdated, null];
+  } catch (error) {
+    handleError(error, "product.service.js -> updateEmpresa");
+  }
 }
 
-async function deleteEmpresa(id){
-    try {
-        const empresaFound = await Empresa.findById(id);
-        if(!empresaFound) return [null, "Empresa no encontrada"];
-        await Empresa.findByIdAndDelete(id);
-        return [empresaFound, null];
-    } catch (error) {
-        handleError(error, "empresa.service -> deleteEmpresa");
-    }
+async function deleteEmpresa(id) {
+  try {
+    await Empresa.findByIdAndDelete(id);
+    return [true, null];
+  } catch (error) {
+    handleError(error, "product.service.js -> deleteEmpresa");
+  }
 }
 
 module.exports = {
-    createEmpresa,
-    getEmpresaById,
-    getEmpresas,
-    updateEmpresa,
-    deleteEmpresa
+  createEmpresa,
+  getEmpresas,
+  getEmpresaById,
+  updateEmpresa,
+  deleteEmpresa,
 };

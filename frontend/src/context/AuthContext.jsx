@@ -14,8 +14,8 @@ export function AuthProvider({ children }) {
   const roles = user.roles || [];
 
   const isAuthenticated = user ? true : false;
-  const isAdmin = roles.some(role => role.name === 'admin');
-
+  const isAdmin = roles.some((role) => role.name === 'admin');
+  
   useEffect(() => {
     if (!isAuthenticated) {
       navigate('/auth');
@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
   }, [isAuthenticated, navigate]);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, isAdmin,}}>
+    <AuthContext.Provider value={{ isAuthenticated, user, isAdmin}}>
       {children}
     </AuthContext.Provider>
   );
