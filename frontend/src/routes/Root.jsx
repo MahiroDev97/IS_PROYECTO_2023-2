@@ -31,6 +31,7 @@ function PageRoot() {
         <button onClick={() => navigate('/')}>Home</button>
         {isAdmin && <button onClick={() => navigate('/admin/postulaciones')}>Admin Postulaciones</button>}
         {isUser && <button onClick={() => navigate('/postular')}>Postular</button>}
+        {isUser && <button onClick={() => navigate('/mispostulaciones')}>Mis Postulaciones</button>}
         <button onClick={handleLogout}>Cerrar sesion</button>
       </div>
       <Outlet />

@@ -9,6 +9,7 @@ import AdminRoute from './components/AdminRoute.jsx';
 import {AdminPage} from './routes/AdminPage.jsx';
 import {Postulaciones} from './routes/Postulaciones.jsx';
 import PostulacionForm from './components/PostulacionForm.jsx';
+import { MisPostulaciones } from './routes/MisPostulaciones.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: '/postular',
         element: <PostulacionForm />,
+      },
+      {
+        path: '/mispostulaciones',
+        element: <MisPostulaciones />,
       },
       {
         path: '/admin',

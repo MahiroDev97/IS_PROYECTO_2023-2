@@ -24,9 +24,37 @@ export const getPostulacion = async (id) => {
   }
 };
 
+export const getPostulacionesByUser = async (userEmail) => {
+  try {
+    const response = await axios.get(`/postulaciones/user/${userEmail}`);
+    if (response.status === 200) {
+      return response.data;
+    }
+    return [];
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const createPostulacion = async (postulacion) => {
   try {
-    const response = await axios.post("/postulaciones", postulacion);
+    const formData = new FormData();
+    formData.append("empresa", postulacion.empresa);
+    formData.append("tipo", postulacion.tipo);
+    for (let i = 0; i < postulacion.documentos.length; i++) {
+      formData.append(`documentos[${i}]`, postulacion.documentos[i]);
+    }
+    // console.log(
+    //   "Esto es la form Data",
+    //   "Empresa:",
+    //   formData.getAll("empresa"),
+    //   "Tipo:",
+    //   formData.getAll("tipo")
+    // );
+    // for (let i = 0; i < postulacion.documentos.length; i++) {
+    //   console.log(`Documentos[${i}]:`, formData.getAll(`documentos[${i}]`));
+    // }
+    const response = await axios.post("/postulaciones", formData);
     if (response.status === 201) {
       return response.data;
     }

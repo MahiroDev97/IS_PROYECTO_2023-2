@@ -15,5 +15,6 @@ router.get("/:id", postulacionController.getPostulacionById);
 router.post("/", uploadMiddleware, postulacionController.createPostulacion);
 router.put("/:id", postulacionController.updatePostulacion);
 router.delete("/:id", postulacionController.deletePostulacion);
+router.get("/user/:userEmail", postulacionController.getPostulacionesByUser);
 
 module.exports = router;

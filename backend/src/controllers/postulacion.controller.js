@@ -8,6 +8,7 @@ const { postulacionBodySchema } = require("../schema/postulacion.schema.js");
 async function createPostulacion(req, res) {
   try {
     let { body } = req;
+    console.log("Este es el body de la req en el backend: ", body);
     body.documentos = req.files.map((file) => ({
       nombre: file.originalname,
       url: file.path,
@@ -55,6 +56,22 @@ async function getPostulacionById(req, res) {
   }
 }
 
+async function getPostulacionesByUser(req, res) {
+  try {
+    const { userEmail } = req.params;
+    const [postulaciones, errorPostulaciones] =
+      await PostulacionService.getPostulacionesByUser(userEmail);
+    if (errorPostulaciones)
+      return res.status(404).json({ error: errorPostulaciones });
+    postulaciones.length === 0
+      ? res.status(204).send()
+      : res.status(200).json(postulaciones);
+  } catch (error) {
+    handleError(error, "postulacion.controller.js -> getPostulaciones");
+    res.status(500).json({ error: error.message });
+  }
+}
+
 async function updatePostulacion(req, res) {
   try {
     const { id } = req.params;
@@ -88,4 +105,5 @@ module.exports = {
   getPostulacionById,
   updatePostulacion,
   deletePostulacion,
+  getPostulacionesByUser,
 };

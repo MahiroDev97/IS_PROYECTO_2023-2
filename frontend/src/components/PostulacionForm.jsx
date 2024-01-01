@@ -1,52 +1,59 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { createPostulacion } from "../services/postulaciones.service";
 import { getEmpresasByUser } from "../services/empresa.service";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPostulacion } from "../services/postulaciones.service";
 
-function PostulacionForm() {
+export default function PostulacionForm() {
+
+    const { register, handleSubmit,watch, formState: { errors } } = useForm();
     const navigate = useNavigate();
-    const [empresas, setEmpresas] = useState([]);
-
-    const {
-        register,
-        handleSubmit,
-    } = useForm({ mode: 'onSubmit' });
 
     const userEmail = JSON.parse(localStorage.getItem("user")).email;
-    
+
+    const [empresas, setEmpresas] = useState([]);
+
     useEffect(() => {
-        getEmpresasByUser(userEmail).then((res) => {
-            setEmpresas(res.data);
+        getEmpresasByUser(userEmail).then((response) => {
+            setEmpresas(response.data);
         });
     }, []);
 
-    const onSubmit = (data) => {
-        createPostulacion(data).then((res) => {
-            console.log("Postulacion creada");
-            console.log(res);
-            navigate("/");
-        });
+
+    // console.log(empresas)
+    const onSubmit = async (data) => {
+        console.log("Esto es la data del front", data);
+        await createPostulacion(data);
+        navigate("/");
+        
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <select {...register("empresa")}>
-                {empresas && empresas.length > 0 ? (
-                    empresas.map((empresa) => (
-                        <option key={empresa._id} value={empresa._id}>
-                            {empresa.nombre} - Rut: {empresa.rut} 
-                        </option>
-                    ))
-                ) : (
-                    <option>No tiene empresas</option>
-                )}
-            </select>
-            {/* Rest of your form */}
-            <input type="submit" disabled={!empresas || empresas.length === 0} />
-        </form>
-    );
-}
 
-export default PostulacionForm;
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="form-group">
+                <label htmlFor="empresa">Empresa</label>
+                <select className="form-control" id="empresa" {...register("empresa", { required: true })}>
+                    {empresas.map((empresa) => (
+                        <option key={empresa._id} value={empresa._id}>{empresa.nombre}</option>
+                    ))}
+                </select>
+            </div>
+            <div className="form-group">
+                <label htmlFor="descripcion">Tipo de Patente</label>
+                <select className="form-control" id="tipo" {...register("tipo", { required: true })}>
+                    <option value = "Comercial">Comercial</option>
+                    <option value = "De Alcoholes">De Alcoholes</option>
+                </select>
+            </div>
+            <div className="form-group">
+                <label htmlFor="documentos">documentos</label>
+                <input type="file" className="form-control-file" id="Documentos" multiple {...register("documentos", { required: true })} />
+            </div>
+            <button type="submit" className="btn btn-primary">Postular</button>
+        </form>
+
+    );
+
+
+}
