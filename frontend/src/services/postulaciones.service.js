@@ -38,23 +38,11 @@ export const getPostulacionesByUser = async (userEmail) => {
 
 export const createPostulacion = async (postulacion) => {
   try {
-    const formData = new FormData();
-    formData.append("empresa", postulacion.empresa);
-    formData.append("tipo", postulacion.tipo);
-    for (let i = 0; i < postulacion.documentos.length; i++) {
-      formData.append(`documentos[${i}]`, postulacion.documentos[i]);
-    }
-    // console.log(
-    //   "Esto es la form Data",
-    //   "Empresa:",
-    //   formData.getAll("empresa"),
-    //   "Tipo:",
-    //   formData.getAll("tipo")
-    // );
-    // for (let i = 0; i < postulacion.documentos.length; i++) {
-    //   console.log(`Documentos[${i}]:`, formData.getAll(`documentos[${i}]`));
-    // }
-    const response = await axios.post("/postulaciones", formData);
+    const response = await axios.post("/postulaciones", postulacion, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     if (response.status === 201) {
       return response.data;
     }

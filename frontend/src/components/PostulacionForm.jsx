@@ -20,10 +20,16 @@ export default function PostulacionForm() {
     }, []);
 
 
-    // console.log(empresas)
     const onSubmit = async (data) => {
         console.log("Esto es la data del front", data);
-        await createPostulacion(data);
+        const formData = new FormData();
+        formData.append("empresa", data.empresa);
+        formData.append("tipo", data.tipo);
+        for (let i = 0; i < data.documentos.length; i++) {
+            formData.append("documentos", data.documentos[i]);
+        }
+
+        await createPostulacion(formData);
         navigate("/");
         
     };
