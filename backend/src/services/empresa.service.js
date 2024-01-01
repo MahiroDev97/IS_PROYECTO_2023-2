@@ -43,6 +43,16 @@ async function getEmpresaById(id) {
   }
 }
 
+async function getEmpresasByUser(userEmail) {
+  try {
+    const user = await User.findOne({ email: userEmail });
+    const empresas = await Empresa.find({ user: user._id }).populate("user");
+    return [empresas, null];
+  } catch (error) {
+    handleError(error, "empresa.service.js -> getEmpresasByUser");
+  }
+}
+
 async function updateEmpresa(id, empresa) {
   try {
     const { nombre, giro, rut, direccion, user } = empresa;
@@ -82,4 +92,5 @@ module.exports = {
   getEmpresaById,
   updateEmpresa,
   deleteEmpresa,
+  getEmpresasByUser,
 };

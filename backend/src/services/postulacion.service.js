@@ -3,6 +3,7 @@
 const handleError = require("../utils/errorHandler");
 const Postulacion = require("../models/postulacion.model");
 const Empresa = require("../models/empresa.model");
+const { func } = require("joi");
 
 async function createPostulacion(postulacion) {
   try {
@@ -54,6 +55,26 @@ async function getPostulacionById(id) {
   }
 }
 
+async function getPostulacionesByUser(userEmail) {
+  try {
+    const postulaciones = await Postulacion.find()
+      .populate({
+        path: "empresa",
+        populate: {
+          path: "user",
+          match: { email: userEmail },
+        },
+      })
+      .exec();
+    console.log(postulaciones);
+    if (!postulaciones || postulaciones.length === 0)
+      return [null, "No hay postulaciones disponibles."];
+    return [postulaciones, null];
+  } catch (error) {
+    handleError(error, "postulacion.service.js -> getPostulaciones");
+  }
+}
+
 async function updatePostulacion(id, postulacion) {
   try {
     const postulacionFound = await Postulacion.findById(id);
@@ -88,4 +109,5 @@ module.exports = {
   getPostulacionById,
   updatePostulacion,
   deletePostulacion,
+  getPostulacionesByUser,
 };

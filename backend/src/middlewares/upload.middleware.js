@@ -7,20 +7,6 @@ const storage = multer.diskStorage({
   },
 });
 
-const fileFilter = (_, file, cb) => {
-  const allowedMimes = [
-    "application/pdf",
-    "application/msword",
-    "image/jpeg",
-    "image/png",
-  ];
-  if (allowedMimes.includes(file.mimetype)) {
-    cb(null, true);
-  } else {
-    cb(new Error("Invalid file type."));
-  }
-};
-
-const upload = multer({ storage, fileFilter }).array("documentos", 10);
+const upload = multer({ storage }).array("documentos");
 
 module.exports = upload;

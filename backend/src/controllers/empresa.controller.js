@@ -73,10 +73,27 @@ async function deleteEmpresa(req, res) {
   }
 }
 
+async function getEmpresasByUser(req, res) {
+  try {
+    const { email } = req.params;
+    const [empresas, errorEmpresas] =
+      await EmpresaService.getEmpresasByUser(email);
+    if (errorEmpresas) return respondError(req, res, 404, errorEmpresas);
+
+    empresas.length === 0
+      ? respondSuccess(req, res, 204)
+      : respondSuccess(req, res, 200, empresas);
+  } catch (error) {
+    handleError(error, "empresa.controller.js -> getEmpresasByUser");
+    respondError(req, res, 500, error.message);
+  }
+}
+
 module.exports = {
   createEmpresa,
   getEmpresas,
   getEmpresaById,
   updateEmpresa,
   deleteEmpresa,
+  getEmpresasByUser,
 };
