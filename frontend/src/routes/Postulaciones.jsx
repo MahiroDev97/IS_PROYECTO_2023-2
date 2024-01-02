@@ -20,6 +20,7 @@ export const Postulaciones = () => {
   const handleCerrarDetalle = () => {
     setDetalleAbierto(false);
     setPostulacionSeleccionada(null);
+    fetchPostulaciones();
   };
 
   const fetchPostulaciones = async () => {

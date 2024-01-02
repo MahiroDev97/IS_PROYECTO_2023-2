@@ -1,6 +1,7 @@
 import { updatePostulacion } from "../services/postulaciones.service";
 import { useState } from "react";
 import "../styles/DetallePostulacion.css";
+import { toast } from "react-toastify";
 export const DetallePostulacion = ({ postulacion, cerrar }) => {
   const [comentariosRevisor, setComentariosRevisor] = useState(
     postulacion.comentariosRevisor
@@ -11,7 +12,13 @@ export const DetallePostulacion = ({ postulacion, cerrar }) => {
   };
 
   const handleUpdatePostulacion = async (id, updatedPostulacion) => {
-    await updatePostulacion(id, updatedPostulacion);
+    try {
+      await updatePostulacion(id, updatedPostulacion);
+      toast.success("Postulación actualizada correctamente.");
+      cerrar();
+    } catch (error) {
+      toast.error("Error al actualizar la postulación.");
+    }
   };
   return (
     <div className="DetallePostulacion">
@@ -40,7 +47,11 @@ export const DetallePostulacion = ({ postulacion, cerrar }) => {
       <p>
         <strong>Documentos:</strong>{" "}
         {postulacion.documentos.map((path, i) => (
-          <a key={i} href={` http://localhost:5000/${path.url}`}>
+          <a
+            className="documento"
+            key={i}
+            href={` http://localhost:5000/${path.url}`}
+          >
             {path.nombre}
           </a>
         ))}
