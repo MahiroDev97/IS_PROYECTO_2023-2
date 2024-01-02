@@ -1,3 +1,6 @@
+.active {
+    background-color: #1d4ed8;
+}
 
 nav{
     display: flex;
@@ -26,8 +29,21 @@ nav ul li a{
     display: block;
     text-decoration: none;
     color: white;
-    
     padding: 0.5rem;
     margin: 0 0.5rem;
-    border-radius: 0.5rem;
+    border-radius: 0.8rem;
+}
+
+nav ul li p {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+    border-radius: 0.8rem;
+    font-weight: bold;
+}
+nav ul li a:hover{
+    background-color: rgba(67, 100, 201, 0.767);
+    
 }

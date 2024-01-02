@@ -36,6 +36,18 @@ export const getEmpresasByUser = async (userEmail) => {
   }
 };
 
+export const getEmpresaByRut = async (rut) => {
+  try {
+    const response = await axios.get(`/empresas/rut/${rut}`);
+    if (response.status === 200) {
+      return response.data;
+    }
+    return {};
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const createEmpresa = async (empresa) => {
   try {
     const response = await axios.post("/empresas", empresa);
@@ -45,6 +57,7 @@ export const createEmpresa = async (empresa) => {
     return {};
   } catch (error) {
     console.error(error);
+    return;
   }
 };
 
