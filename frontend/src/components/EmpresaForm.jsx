@@ -47,35 +47,35 @@ export default function EmpresaForm() {
   return (
     <div className="empresaFormPage">
       <div className="empresaFormBox">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}> <br />
           <label htmlFor="nombreEmpresa">Nombre Empresa</label> <br />
           <input
             type="text"
             name="nombreEmpresa"
             placeholder="Nombre de la empresa"
             {...register("nombre", { required: true })}
-          /> <br />
+          /> <br /> <br />
           <label htmlFor="GiroEmpresa">Giro</label> <br />
           <input
             type="text"
             name="GiroEmpresa"
             placeholder="Giro de la empresa"
             {...register("giro", { required: true })}
-          /> <br />
+          /> <br /> <br />
           <label htmlFor="RutEmpresa">Rut</label> <br />
           <input
             type="text"
             name="RutEmpresa"
             placeholder="Rut de la empresa"
             {...register("rut", { required: true })}
-          /> <br />
+          /> <br /> <br />
           <label htmlFor="DireccionEmpresa">Direccion</label> <br />
           <input
             type="text"
             name="DireccionEmpresa"
             placeholder="Direccion de la empresa"
             {...register("direccion", { required: true })}
-          /> <br />
+          /> <br /> <br />
           <button className="buttonCrear">Crear</button>
         </form>
       </div>

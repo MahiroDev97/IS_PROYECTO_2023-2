@@ -6,6 +6,7 @@ import {
 import { DetallePostulacion } from "../components/DetallePostulacion";
 import { useEffect, useState } from "react";
 import "../styles/Postulaciones.css";
+
 export const Postulaciones = () => {
   const [postulaciones, setPostulaciones] = useState([]);
 
