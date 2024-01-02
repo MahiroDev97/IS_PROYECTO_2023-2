@@ -56,6 +56,16 @@
   background-color: #c82333;
 }
 
+.documento {
+  padding: 3px;
+}
+
+.ComentariosRevisor {
+  font-size: 18px;
+  padding: 8px 8px;
+  border-radius: 5px;
+}
+
 .buttons {
   display: flex;
   justify-content: space-around;
