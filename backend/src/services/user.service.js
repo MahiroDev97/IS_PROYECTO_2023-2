@@ -72,6 +72,14 @@ async function getUserById(id) {
   }
 }
 
+async function getUserByEmail(email) {
+  try {
+    const user = await User.findOne({ email: email });
+    return [user, null];
+  } catch (error) {
+    handleError(error, "user.service -> getUserByEmail");
+  }
+}
 /**
  * Actualiza un usuario por su id en la base de datos
  * @param {string} id Id del usuario
@@ -135,4 +143,5 @@ module.exports = {
   getUserById,
   updateUser,
   deleteUser,
+  getUserByEmail,
 };

@@ -53,6 +53,15 @@ async function getEmpresasByUser(userEmail) {
   }
 }
 
+async function getEmpresaByRut(rut) {
+  try {
+    const empresa = await Empresa.findOne({ rut }).populate("user");
+    return [empresa, null];
+  } catch (error) {
+    handleError(error, "product.service.js -> getEmpresaByRut");
+  }
+}
+
 async function updateEmpresa(id, empresa) {
   try {
     const { nombre, giro, rut, direccion, user } = empresa;
@@ -93,4 +102,5 @@ module.exports = {
   updateEmpresa,
   deleteEmpresa,
   getEmpresasByUser,
+  getEmpresaByRut,
 };

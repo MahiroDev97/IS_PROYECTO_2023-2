@@ -7,15 +7,17 @@ const { empresaBodySchema } = require("../schema/empresa.schema.js");
 
 async function createEmpresa(req, res) {
   try {
-    const { body } = req;
+    let { body } = req;
     const { error } = empresaBodySchema.validate(body);
     if (error) return respondError(req, res, 400, error.message);
     const [empresa, errorEmpresa] = await EmpresaService.createEmpresa(body);
-    if (errorEmpresa) return respondError(res, errorEmpresa);
-    return respondSuccess(res, empresa);
+    if (errorEmpresa) return respondError(req, res, 409, errorEmpresa);
+    if (!empresa)
+      return respondError(req, res, 400, "No se pudo crear la empresa");
+    respondSuccess(req, res, 201, empresa);
   } catch (error) {
     handleError(error, "empresa.controller.js -> createEmpresa");
-    respondError(res, req, 500, error.message);
+    respondError(req, res, 500, error.message);
   }
 }
 
@@ -89,6 +91,18 @@ async function getEmpresasByUser(req, res) {
   }
 }
 
+async function getEmpresaByRut(req, res) {
+  try {
+    const { rut } = req.params;
+    const [empresa, errorEmpresa] = await EmpresaService.getEmpresaByRut(rut);
+    if (errorEmpresa) return respondError(req, res, 404, errorEmpresa);
+    respondSuccess(req, res, 200, empresa);
+  } catch (error) {
+    handleError(error, "empresa.controller.js -> getEmpresaByRut");
+    respondError(req, res, 500, error.message);
+  }
+}
+
 module.exports = {
   createEmpresa,
   getEmpresas,
@@ -96,4 +110,5 @@ module.exports = {
   updateEmpresa,
   deleteEmpresa,
   getEmpresasByUser,
+  getEmpresaByRut,
 };
