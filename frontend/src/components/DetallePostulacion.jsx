@@ -12,7 +12,13 @@ export const DetallePostulacion = ({ postulacion, cerrar }) => {
   };
 
   const handleUpdatePostulacion = async (id, updatedPostulacion) => {
-    await updatePostulacion(id, updatedPostulacion);
+    try {
+      await updatePostulacion(id, updatedPostulacion);
+      toast.success("Postulación actualizada correctamente.");
+      cerrar();
+    } catch (error) {
+      toast.error("Error al actualizar la postulación.");
+    }
   };
   return (
     <div className="DetallePostulacion">
