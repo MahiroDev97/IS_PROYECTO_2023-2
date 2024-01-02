@@ -50,6 +50,9 @@ function PageRoot() {
               <NavLink to="/mispostulaciones">Mis Postulaciones</NavLink>
             )}
           </li>
+          <li>
+            {isUser && <NavLink to="/crearempresa">Registrar Empresa</NavLink>}
+          </li>
           <li>{isUser && <NavLink to="/misempresas">Mis Empresas</NavLink>}</li>
           <li>
             <Link onClick={handleLogout}>Cerrar Sesión</Link>
