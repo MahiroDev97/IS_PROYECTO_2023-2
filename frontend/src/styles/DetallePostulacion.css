@@ -1,21 +1,70 @@
 .DetallePostulacion {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    width: 80%;
-    max-width: 500px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  }
-  
-  .DetallePostulacion h1 {
-    margin-top: 0;
-  }
-  
-  .DetallePostulacion button {
-    margin-top: 20px;
-  }
-  
-  .DetallePostulacion textarea {
-    width: 100%;
-    margin-top: 10px;
-  }
+  position: relative;
+  background-color: #444343a8;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.DetallePostulacion h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.cerrar {
+  position: absolute;
+  top: 1.5%;
+  right: 5%;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.cerrar:hover {
+  background-color: #007bff;
+}
+
+.aprobar {
+  width: 100px;
+  height: 25px;
+  background-color: #28a745;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.aprobar:hover {
+  background-color: #218838;
+}
+
+.rechazar {
+  width: 100px;
+  height: 25px;
+  background-color: #dc3545;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.rechazar:hover {
+  background-color: #c82333;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
+.DetallePostulacion button {
+  margin-top: 20px;
+}
+
+.DetallePostulacion textarea {
+  width: 100%;
+  margin-top: 10px;
+}
