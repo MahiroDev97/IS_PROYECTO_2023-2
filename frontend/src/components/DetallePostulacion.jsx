@@ -2,7 +2,9 @@ import { updatePostulacion } from "../services/postulaciones.service";
 import { useState } from "react";
 import "../styles/DetallePostulacion.css";
 export const DetallePostulacion = ({ postulacion, cerrar }) => {
-  const [comentariosRevisor, setComentariosRevisor] = useState("");
+  const [comentariosRevisor, setComentariosRevisor] = useState(
+    postulacion.comentariosRevisor
+  );
 
   const handleComentariosRevisor = (e) => {
     setComentariosRevisor(e.target.value);
@@ -13,8 +15,10 @@ export const DetallePostulacion = ({ postulacion, cerrar }) => {
   };
   return (
     <div className="DetallePostulacion">
+      <button className="cerrar" onClick={cerrar}>
+        X
+      </button>
       <h1>Detalle Postulación</h1>
-      <button onClick={cerrar}>Cerrar</button>
       <p>
         <strong>Rut Empresa:</strong> {postulacion.empresa.rut}
       </p>
@@ -51,8 +55,9 @@ export const DetallePostulacion = ({ postulacion, cerrar }) => {
           onChange={handleComentariosRevisor}
         ></textarea>
       </div>
-      <div>
+      <div className="buttons">
         <button
+          className="aprobar"
           onClick={() =>
             handleUpdatePostulacion(postulacion._id, {
               ...postulacion,
@@ -64,6 +69,7 @@ export const DetallePostulacion = ({ postulacion, cerrar }) => {
           Aprobar
         </button>
         <button
+          className="rechazar"
           onClick={() =>
             handleUpdatePostulacion(postulacion._id, {
               ...postulacion,
