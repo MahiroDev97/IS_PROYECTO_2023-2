@@ -78,7 +78,7 @@ export const Postulaciones = () => {
               <td>{postulacion.comentariosRevisor}</td>
               <td>{new Date(postulacion.fechaenvio).toLocaleDateString()}</td>
               <td>
-                <button
+                <button className="buttonAprobar"
                   type="aprobar"
                   onClick={() =>
                     handleUpdatePostulacion(postulacion._id, {
@@ -89,7 +89,7 @@ export const Postulaciones = () => {
                 >
                   Aprobar
                 </button>
-                <button
+                <button className="buttonRechazar"
                   type="rechazar"
                   onClick={() =>
                     handleUpdatePostulacion(postulacion._id, {
@@ -100,7 +100,7 @@ export const Postulaciones = () => {
                 >
                   Rechazar
                 </button>
-                <button
+                <button className="buttonEliminar"
                   type="eliminar"
                   onClick={() => handleDeletePostulacion(postulacion._id)}
                 >

@@ -69,7 +69,7 @@
   color: white;
 }
 
-button[type="aprobar"] {
+.buttonAprobar {
   width: 100px;
   height: 25px;
   background-color: #28a745;
@@ -80,7 +80,11 @@ button[type="aprobar"] {
   margin: 5px;
 }
 
-button[type="rechazar"] {
+.tablaEvPostulaciones .buttonAprobar:hover {
+  background-color: #218838;
+}
+
+.buttonRechazar {
   width: 100px;
   height: 25px;
   background-color: #dc3545;
@@ -91,7 +95,11 @@ button[type="rechazar"] {
   margin: 5px;
 }
 
-button[type="eliminar"] {
+.tablaEvPostulaciones .buttonRechazar:hover {
+  background-color: #c82333;
+}
+
+.buttonEliminar {
   width: 100px;
   height: 25px;
   background-color: #a0a0a0;
@@ -100,4 +108,8 @@ button[type="eliminar"] {
   border-radius: 5px;
   border: none;
   margin: 5px;
+}
+
+.tablaEvPostulaciones .buttonEliminar:hover {
+  background-color: #cfcfcf;
 }
