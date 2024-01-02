@@ -1,10 +1,27 @@
-import { getEmpresasByUser } from "../services/empresa.service";
+import { getEmpresasByUser, deleteEmpresa } from "../services/empresa.service";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import "../styles/MisEmpresas.css";
 export const MisEmpresas = () => {
   const [misEmpresas, setMisEmpresas] = useState([]);
 
   const userEmail = JSON.parse(localStorage.getItem("user")).email;
+
+  const fetchEmpresas = async () => {
+    const res = await getEmpresasByUser(userEmail);
+    setMisEmpresas(res.data);
+  };
+
+  const handleDeleteEmpresa = async (id) => {
+    await deleteEmpresa(id);
+    const response = await deleteEmpresa(id);
+    if (response.status === 200) {
+      toast.success("Empresa eliminada exitosamente");
+      fetchEmpresas();
+    } else {
+      toast.error("Error al eliminar la empresa");
+    }
+  };
 
   useEffect(() => {
     getEmpresasByUser(userEmail).then((res) => {
@@ -23,6 +40,7 @@ export const MisEmpresas = () => {
             <th>Giro</th>
             <th>Rut</th>
             <th>Dirección</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -40,6 +58,14 @@ export const MisEmpresas = () => {
                 <td>{misEmpresas.giro}</td>
                 <td>{misEmpresas.rut}</td>
                 <td>{misEmpresas.direccion}</td>
+                <td>
+                  <button
+                    className="eliminar"
+                    onClick={() => handleDeleteEmpresa(misEmpresas._id)}
+                  >
+                    Eliminar
+                  </button>
+                </td>
               </tr>
             ))
           )}

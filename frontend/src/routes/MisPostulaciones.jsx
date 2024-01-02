@@ -1,9 +1,22 @@
 import { getPostulacionesByUser } from "../services/postulaciones.service";
 import { useEffect, useState } from "react";
-import '../styles/MisPostulaciones.css';
-
+import "../styles/MisPostulaciones.css";
+import { DetallePostulacionUsuario } from "../components/DetallePostulacionUsuario";
 export const MisPostulaciones = () => {
   const [misPostulaciones, setMisPostulaciones] = useState([]);
+
+  const [detalleAbierto, setDetalleAbierto] = useState(false);
+  const [postulacionSeleccionada, setPostulacionSeleccionada] = useState(null);
+
+  const handleAbrirDetalle = (postulacion) => {
+    setDetalleAbierto(true);
+    setPostulacionSeleccionada(postulacion);
+  };
+
+  const handleCerrarDetalle = () => {
+    setDetalleAbierto(false);
+    setPostulacionSeleccionada(null);
+  };
 
   const userEmail = JSON.parse(localStorage.getItem("user")).email;
   useEffect(() => {
@@ -14,6 +27,14 @@ export const MisPostulaciones = () => {
 
   return (
     <div className="misPostulaciones">
+      {detalleAbierto && (
+        <div className="modal">
+          <DetallePostulacionUsuario
+            postulacion={postulacionSeleccionada}
+            cerrar={handleCerrarDetalle}
+          />
+        </div>
+      )}
       <h1>Mis Postulaciones</h1>
       <table>
         <thead>
@@ -34,7 +55,10 @@ export const MisPostulaciones = () => {
           ) : (
             Array.isArray(misPostulaciones) &&
             misPostulaciones.map((misPostulaciones) => (
-              <tr key={misPostulaciones._id}>
+              <tr
+                key={misPostulaciones._id}
+                onClick={() => handleAbrirDetalle(misPostulaciones)}
+              >
                 <td>{misPostulaciones.empresa.user.username}</td>
                 <td>{misPostulaciones.empresa.user.email}</td>
                 <td>{misPostulaciones.estado}</td>

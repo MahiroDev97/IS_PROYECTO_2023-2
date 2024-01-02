@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cuadro {
+  flex: 1;
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid black;
+}
