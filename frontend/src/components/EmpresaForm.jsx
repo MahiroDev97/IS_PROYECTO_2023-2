@@ -4,7 +4,9 @@ import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { getUserByEmail } from "../services/user.service";
 import { getEmpresaByRut } from "../services/empresa.service";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
+import "../styles/EmpresaForm.css";
+
 export default function EmpresaForm() {
   const {
     register,

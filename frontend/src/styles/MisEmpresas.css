@@ -1,0 +1,40 @@
+.mis-empresas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #242424; /* Color de fondo */
+  }
+  
+  .mis-empresas h1 {
+    color: #FFFFFF; /* Color de texto blanco para contraste */
+  }
+  
+  .mis-empresas table {
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+  }
+  
+  .mis-empresas th, .mis-empresas td {
+    border: 1px solid transparent;
+    padding: 8px;
+    color: #FFFFFF; /* Color de texto blanco para contraste */
+  }
+  
+  .mis-empresas tr:nth-child(even) {
+    background-color: #2d2d2d; /* Color de las filas pares, un poco más claro que el fondo */
+  }
+  
+  .mis-empresas tr:nth-child(odd) {
+    background-color: #1e1e1e; /* Color de las filas impares, un poco más oscuro que el fondo */
+  }
+  
+  .mis-empresas th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #007BFF;
+    color: white;
+  }

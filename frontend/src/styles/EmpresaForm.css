@@ -1,0 +1,36 @@
+.empresasbox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 300px;
+    margin: auto;
+  }
+  
+  .empresasbox form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .empresasbox label {
+    margin-top: 10px;
+  }
+  
+  .empresasbox input {
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .empresasbox button {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+  }

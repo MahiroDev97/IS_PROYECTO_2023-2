@@ -1,10 +1,11 @@
 import { getEmpresasByUser } from "../services/empresa.service";
 import { useEffect, useState } from "react";
-
+import "../styles/MisEmpresas.css";
 export const MisEmpresas = () => {
   const [misEmpresas, setMisEmpresas] = useState([]);
 
   const userEmail = JSON.parse(localStorage.getItem("user")).email;
+
   useEffect(() => {
     getEmpresasByUser(userEmail).then((res) => {
       setMisEmpresas(res.data);
@@ -13,9 +14,9 @@ export const MisEmpresas = () => {
 
   console.log(misEmpresas);
   return (
-    <>
+    <div className="mis-empresas">
       <h1>Mis Empresas</h1>
-      <table>
+      <table className="content-table">
         <thead>
           <tr>
             <th>Nombre</th>
@@ -44,6 +45,6 @@ export const MisEmpresas = () => {
           )}
         </tbody>
       </table>
-    </>
+    </div>
   );
 };
