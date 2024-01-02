@@ -67,6 +67,7 @@ export const Postulaciones = () => {
         <tbody>
           {postulaciones.map((postulacion) => (
             <tr
+              className="filatabla"
               key={postulacion._id}
               onClick={() => handleAbrirDetalle(postulacion)}
             >
