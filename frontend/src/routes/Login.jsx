@@ -1,6 +1,5 @@
 import LoginForm from "../components/LoginForm";
 import { useNavigate } from "react-router-dom";
-//import "../styles/LoginStyles.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -14,9 +13,7 @@ function Login() {
     );
   }
 
-  return (
-      <LoginForm />
-  );
+  return <LoginForm />;
 }
 
 export default Login;

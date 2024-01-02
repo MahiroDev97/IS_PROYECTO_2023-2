@@ -41,7 +41,7 @@ export default function PostulacionForm() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="postularPage">
         <div className="postularBox">
-          <div className="form-group">
+          <div className="form-group"> <br />
             <label htmlFor="empresa">Empresa</label> <br />
             <select
               className="form-control"
@@ -54,7 +54,7 @@ export default function PostulacionForm() {
                 </option>
               ))}
             </select>
-          </div>
+          </div> <br />
           <div className="form-group">
             <label htmlFor="descripcion">Tipo de Patente</label> <br />
             <select
@@ -65,7 +65,7 @@ export default function PostulacionForm() {
               <option value="Comercial">Comercial</option>
               <option value="De Alcoholes">De Alcoholes</option>
             </select>
-          </div>
+          </div> <br />
           <div className="form-group">
             <label htmlFor="documentos">Documentos</label> <br />
             <input
@@ -75,7 +75,7 @@ export default function PostulacionForm() {
               multiple
               {...register("documentos", { required: true })}
             />
-          </div>
+          </div> <br />
           <button type="submit" className="botonPostular">
             Postular
           </button>
