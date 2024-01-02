@@ -1,7 +1,8 @@
-import { Outlet, json } from 'react-router-dom';
+import { Outlet, json, Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../services/auth.service';
 import { AuthProvider, useAuth } from '../context/AuthContext';
+import '../styles/NavBar.css'
 
 
 function Root() {
@@ -24,18 +25,31 @@ function PageRoot() {
 
 
   return (
-    <div>
-      <div>
-        <h1>Aqui deberia ir un header</h1>
-        <p>Estas logeado como: {user.email}</p>
-        <button onClick={() => navigate('/')}>Home</button>
-        {isAdmin && <button onClick={() => navigate('/admin/postulaciones')}>Admin Postulaciones</button>}
-        {isUser && <button onClick={() => navigate('/postular')}>Postular</button>}
-        {isUser && <button onClick={() => navigate('/mispostulaciones')}>Mis Postulaciones</button>}
-        <button onClick={handleLogout}>Cerrar sesion</button>
-      </div>
+    <>
+      <nav>
+        <Link to="/" className='title'>Inicio</Link>
+        <ul>
+          <li>
+            <Link to="/postular">Postular</Link>
+            <Link onClick={handleLogout}>Cerrar Sesión</Link>
+          </li>
+        </ul>
+      </nav>
       <Outlet />
-    </div>
+    </>
+     
+    // <div>
+    //   <div>
+    //     <h1>Aqui deberia ir un header</h1>
+    //     <p>Estas logeado como: {user.email}</p>
+    //     <button onClick={() => navigate('/')}>Home</button>
+    //     {isAdmin && <button onClick={() => navigate('/admin/postulaciones')}>Admin Postulaciones</button>}
+    //     {isUser && <button onClick={() => navigate('/postular')}>Postular</button>}
+    //     {isUser && <button onClick={() => navigate('/mispostulaciones')}>Mis Postulaciones</button>}
+    //     <button onClick={handleLogout}>Cerrar sesion</button>
+    //   </div>
+    //   <Outlet />
+    // </div>
   );
 }
 

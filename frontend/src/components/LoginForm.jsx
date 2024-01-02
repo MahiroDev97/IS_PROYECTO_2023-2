@@ -38,8 +38,8 @@ function LoginForm() {
     //   {errors.exampleRequired && <span>This field is required</span>}
     //   <input type="submit" />
     // </form>
-
-    <div className="loginBox">
+    <div className="loginPage">
+      <div className="loginBox">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h2>Iniciar Sesion</h2>
 
@@ -72,9 +72,11 @@ function LoginForm() {
 
         <br />
 
-        <button type="submit">Ingresar</button>
+        <button className="botonlogin" type="submit">Ingresar</button>
       </form>
     </div>
+    </div>
+    
   );
 }
 

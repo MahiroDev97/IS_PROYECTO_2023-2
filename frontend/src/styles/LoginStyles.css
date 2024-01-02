@@ -14,6 +14,7 @@
   border: 5px #000000;
   padding: 50px;
   margin: 20px;
+  border-radius: 15px;
 }
 
 input[type="email"],
@@ -22,13 +23,15 @@ input[type="password"] {
   width: 100%;
   padding: 12px 20px;
   margin: 4px 0;
+  border-radius: 10px;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
   background-color: #f1f1f1;
 }
 
-button {
+.botonlogin{
+  border-radius: 10px ;
   background-color: #0f69c4;
   color: #ffffff;
   padding: 7px 10px;
@@ -38,6 +41,6 @@ button {
   width: 50%;
 }
 
-button:hover {
+.botonlogin:hover {
   opacity: 0.7;
 }
