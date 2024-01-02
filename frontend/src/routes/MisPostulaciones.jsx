@@ -1,5 +1,6 @@
 import { getPostulacionesByUser } from "../services/postulaciones.service";
 import { useEffect, useState } from "react";
+import '../styles/MisPostulaciones.css';
 
 export const MisPostulaciones = () => {
   const [misPostulaciones, setMisPostulaciones] = useState([]);
@@ -12,7 +13,7 @@ export const MisPostulaciones = () => {
   }, []);
 
   return (
-    <>
+    <div className="misPostulaciones">
       <h1>Mis Postulaciones</h1>
       <table>
         <thead>
@@ -20,6 +21,7 @@ export const MisPostulaciones = () => {
             <th>Usuario</th>
             <th>Correo</th>
             <th>Estado</th>
+            <th>Documentos</th>
           </tr>
         </thead>
         <tbody>
@@ -52,6 +54,6 @@ export const MisPostulaciones = () => {
           )}
         </tbody>
       </table>
-    </>
+    </div>
   );
 };

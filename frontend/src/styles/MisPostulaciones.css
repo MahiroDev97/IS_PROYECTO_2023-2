@@ -1,0 +1,41 @@
+
+.misPostulaciones {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #242424; /* Color de fondo */
+}
+
+.misPostulaciones h1 {
+  color: #FFFFFF; /* Color de texto blanco para contraste */
+}
+
+.misPostulaciones table {
+  border-collapse: collapse;
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+}
+
+.misPostulaciones th, .misPostulaciones td {
+  border: 1px solid transparent;
+  padding: 8px;
+  color: #FFFFFF; /* Color de texto blanco para contraste */
+}
+
+.misPostulaciones tr:nth-child(even) {
+  background-color: #2d2d2d; /* Color de las filas pares, un poco más claro que el fondo */
+}
+
+.misPostulaciones tr:nth-child(odd) {
+  background-color: #1e1e1e; /* Color de las filas impares, un poco más oscuro que el fondo */
+}
+
+.misPostulaciones th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #007BFF;
+  color: white;
+}
