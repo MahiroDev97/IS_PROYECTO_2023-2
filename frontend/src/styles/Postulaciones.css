@@ -10,4 +10,78 @@
     background-color: rgba(0, 0, 0, 0.5); /* Aquí es donde se ajusta el color de fondo y la opacidad */
   }
   
+  .tablaEvPostulaciones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #242424; /* Color de fondo */
+  }
   
+  .tablaEvPostulaciones h1 {
+    color: #FFFFFF; /* Color de texto blanco para contraste */
+  }
+  
+  .tablaEvPostulaciones table {
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+  }
+  
+  .tablaEvPostulaciones th, .tablaEvPostulaciones td {
+    border: 1px solid transparent;
+    padding: 8px;
+    color: #FFFFFF; /* Color de texto blanco para contraste */
+  }
+  
+  .tablaEvPostulaciones tr:nth-child(even) {
+    background-color: #2d2d2d; /* Color de las filas pares, un poco más claro que el fondo */
+  }
+  
+  .tablaEvPostulaciones tr:nth-child(odd) {
+    background-color: #1e1e1e; /* Color de las filas impares, un poco más oscuro que el fondo */
+  }
+  
+  .tablaEvPostulaciones th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #007BFF;
+    color: white;
+  }
+
+button[type=aprobar] {
+  width: 100px;
+  height: 25px;
+  background-color: #28a745;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  margin: 5px;
+}
+
+button[type=rechazar] {
+  width: 100px;
+  height: 25px;
+  background-color: #dc3545;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  margin: 5px;
+}
+
+button[type=eliminar] {
+  width: 100px;
+  height: 25px;
+  background-color: #a0a0a0;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  margin: 5px;
+}
+
+

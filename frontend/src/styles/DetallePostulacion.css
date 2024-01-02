@@ -60,6 +60,7 @@
   display: flex;
   justify-content: space-around;
 }
+
 .DetallePostulacion button {
   margin-top: 20px;
 }

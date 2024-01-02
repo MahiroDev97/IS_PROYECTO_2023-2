@@ -42,7 +42,7 @@ export const Postulaciones = () => {
   }, []);
 
   return (
-    <div>
+    <div className="tablaEvPostulaciones">
       {detalleAbierto && (
         <div className="modal">
           <DetallePostulacion
@@ -77,6 +77,7 @@ export const Postulaciones = () => {
               <td>{new Date(postulacion.fechaenvio).toLocaleDateString()}</td>
               <td>
                 <button
+                  type="aprobar"
                   onClick={() =>
                     handleUpdatePostulacion(postulacion._id, {
                       ...postulacion,
@@ -87,6 +88,7 @@ export const Postulaciones = () => {
                   Aprobar
                 </button>
                 <button
+                  type="rechazar"
                   onClick={() =>
                     handleUpdatePostulacion(postulacion._id, {
                       ...postulacion,
@@ -97,6 +99,7 @@ export const Postulaciones = () => {
                   Rechazar
                 </button>
                 <button
+                  type="eliminar"
                   onClick={() => handleDeletePostulacion(postulacion._id)}
                 >
                   Eliminar
