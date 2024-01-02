@@ -45,38 +45,40 @@ export default function EmpresaForm() {
   };
 
   return (
-    <div className="empresasbox">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="nombreEmpresa">Nombre Empresa</label>
-        <input
-          type="text"
-          name="nombreEmpresa"
-          placeholder="Nombre de la empresa"
-          {...register("nombre", { required: true })}
-        />
-        <label htmlFor="GiroEmpresa">Giro</label>
-        <input
-          type="text"
-          name="GiroEmpresa"
-          placeholder="Giro de la empresa"
-          {...register("giro", { required: true })}
-        />
-        <label htmlFor="RutEmpresa">Rut</label>
-        <input
-          type="text"
-          name="RutEmpresa"
-          placeholder="Rut de la empresa"
-          {...register("rut", { required: true })}
-        />
-        <label htmlFor="DireccionEmpresa">Direccion</label>
-        <input
-          type="text"
-          name="DireccionEmpresa"
-          placeholder="Direccion de la empresa"
-          {...register("direccion", { required: true })}
-        />
-        <button type="submit">Crear Empresa</button>
-      </form>
+    <div className="empresaFormPage">
+      <div className="empresaFormBox">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <label htmlFor="nombreEmpresa">Nombre Empresa</label> <br />
+          <input
+            type="text"
+            name="nombreEmpresa"
+            placeholder="Nombre de la empresa"
+            {...register("nombre", { required: true })}
+          /> <br />
+          <label htmlFor="GiroEmpresa">Giro</label> <br />
+          <input
+            type="text"
+            name="GiroEmpresa"
+            placeholder="Giro de la empresa"
+            {...register("giro", { required: true })}
+          /> <br />
+          <label htmlFor="RutEmpresa">Rut</label> <br />
+          <input
+            type="text"
+            name="RutEmpresa"
+            placeholder="Rut de la empresa"
+            {...register("rut", { required: true })}
+          /> <br />
+          <label htmlFor="DireccionEmpresa">Direccion</label> <br />
+          <input
+            type="text"
+            name="DireccionEmpresa"
+            placeholder="Direccion de la empresa"
+            {...register("direccion", { required: true })}
+          /> <br />
+          <button className="buttonCrear">Crear</button>
+        </form>
+      </div>
     </div>
   );
 }
