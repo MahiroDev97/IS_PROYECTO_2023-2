@@ -3,8 +3,8 @@ import "../styles/App.css";
 function CuadroUno() {
   return (
     <div>
-      <h2>¿Qué necesito para postular?</h2>
-      <ul>
+      <h2><br />¿Qué necesito para postular?</h2>
+      <ul className="cuadro">
         <li>
           Escritura de constitución de sociedad, protocolización del extracto y
           publicación en Diario Oficial, si la solicitud corresponde a una
@@ -46,8 +46,8 @@ function CuadroUno() {
 function CuadroDos() {
   return (
     <div>
-      <h2>¿Cuánto cuesta sacar una patente?</h2>
-      <ul>
+      <h2><br />¿Cuánto cuesta sacar una patente?</h2>
+      <ul className="cuadro">
         <li>
           El pago de la patente es anual y su precio varía en cada
           municipalidad. El monto a pagar es entre el 2,5 por mil y el 5 por mil
@@ -70,8 +70,8 @@ function CuadroDos() {
 function CuadroTres() {
   return (
     <div>
-      <h2>¿Cuánto demora el trámite de la patente?</h2>
-      <ul>
+      <h2><br />¿Cuánto demora el trámite de la patente?</h2>
+      <ul className="cuadro">
         <li>
           Este factor también varía dependiendo de las municipalidades, pero se
           maneja un plazo de cinco días hábiles.

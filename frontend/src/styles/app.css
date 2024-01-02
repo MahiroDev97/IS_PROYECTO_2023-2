@@ -1,11 +1,13 @@
-.container {
+/* .container {
   display: flex;
   justify-content: space-between;
-}
+} */
 
 .cuadro {
   flex: 1;
   margin: 10px;
-  padding: 20px;
+  padding: 30px;
   border: 1px solid black;
+  text-align: justify;
+  background-color: #093f75;
 }
